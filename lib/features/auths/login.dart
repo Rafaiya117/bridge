@@ -102,7 +102,9 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: GradientButton(
                     text: 'Log In',
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/feed_page');
+                    },
                   ),
                 ),
                 SizedBox(height: 15.h),

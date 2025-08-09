@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tha_bridge/components/constant.dart';
 import 'package:tha_bridge/custom_widgets/custome_gradient_button.dart';
 import 'package:tha_bridge/custom_widgets/custome_input.dart';
@@ -39,7 +40,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       child: GradientButton(
                         text: 'Verify',
                         //width: 800,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go('/otp_page');
+                        },
                       ),
                     ),
                   ),
