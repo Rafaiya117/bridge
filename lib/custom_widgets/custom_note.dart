@@ -33,33 +33,32 @@ class _ActiveUsersState extends State<ActiveUsers> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.backgroundColor,
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: widget.userNotes.isEmpty
-          ? Center(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: widget.userNotes.isEmpty ? Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SpeechBubble(
-              color: Colors.green,
-              maxWidth: 220,
+              color: Color(0xFF72BE20),
+              maxWidth: 150,
+              maxHeight: 32,
               child: Row(
                 children: [
-                  const Icon(Icons.add, color: Colors.white, size: 20),
-                  const SizedBox(width: 6),
+                  const Icon(Icons.add, color: Colors.white, size: 16),
+                  const SizedBox(width: 4),
                   Expanded(
                     child: TextField(
                       controller: _controller,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                       cursorColor: Colors.white,
                       decoration: const InputDecoration(
                         isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 4),
+                        contentPadding: EdgeInsets.symmetric(vertical: 0),
                         border: InputBorder.none,
                         hintText: 'What in your mind',
-                        hintStyle: TextStyle(color: Colors.white70),
+                        hintStyle: TextStyle(color: Colors.white70, fontSize: 12),
                       ),
                       onSubmitted: (value) {
-                        // You can handle submission here
                         print('User input: $value');
                         _controller.clear();
                       },
@@ -68,42 +67,45 @@ class _ActiveUsersState extends State<ActiveUsers> {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             CircleAvatar(
-              radius: 24,
+              radius: 18,
               backgroundColor: Colors.grey,
-              child: const Icon(Icons.person, color: Colors.white),
+              child: const Icon(Icons.person, color: Colors.white, size: 18),
             ),
           ],
         ),
       ) : SizedBox(
-        height: 150, // Enough to fit speech bubble + spacing + avatar
+        height: 110,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: widget.userNotes.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 16),
+          separatorBuilder: (_, __) => const SizedBox(width: 12),
           itemBuilder: (context, index) {
             final userNote = widget.userNotes[index];
             return SizedBox(
-              width: 80,
+              width: 60,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    constraints: const BoxConstraints(maxWidth: 80),
+                    constraints: const BoxConstraints(maxWidth: 60),
                     child: SpeechBubble(
-                      color: Colors.green,
+                      color: Color(0xFF72BE20),
+                      maxWidth: 100,
+                      maxHeight: 48,
                       child: Text(
                         userNote.note,
                         style: const TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
-                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   CircleAvatar(
-                    radius: 30,
+                    radius: 28,
                     backgroundImage: NetworkImage(userNote.imageUrl),
                   ),
                 ],
@@ -116,33 +118,39 @@ class _ActiveUsersState extends State<ActiveUsers> {
   }
 }
 
-// SpeechBubble widget unchanged except maxWidth support (same as previous)
+
 class SpeechBubble extends StatelessWidget {
   final Widget child;
   final Color color;
   final double? maxWidth;
+  final double? maxHeight;
 
   const SpeechBubble({
     Key? key,
     required this.child,
     this.color = Colors.green,
     this.maxWidth,
+    this.maxHeight,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _BubbleTailPainter(color),
-      child: Container(
-        constraints: maxWidth != null
-            ? BoxConstraints(maxWidth: maxWidth!) // limits width only
-            : const BoxConstraints(),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(12),
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: maxWidth ?? double.infinity,
+            maxHeight: maxHeight ?? double.infinity,
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4), // reduced vertical padding
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: child,
         ),
-        child: child,
       ),
     );
   }

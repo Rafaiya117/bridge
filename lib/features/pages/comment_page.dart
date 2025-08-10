@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tha_bridge/custom_widgets/comment_bubble.dart';
-import 'package:tha_bridge/custom_widgets/custome_social_post.dart';
+import 'package:tha_bridge/custom_widgets/post_widget.dart';
 import 'package:tha_bridge/model/PostModel.dart';
 
 
@@ -22,7 +22,7 @@ class _CommentPageState extends State<CommentPage> {
       userName: 'John Doe',
       postTime: 'Just now',
       postText: 'This is a dummy post used for development/testing.',
-      imageUrl: null,
+      imageUrls: null,
       comments: [
         Comment(userName: 'Alice', text: 'This project idea sounds amazing! Combining social media with mental health support is something we truly need right now'),
         Comment(userName: 'Bob', text: 'Thanks for sharing!'),
@@ -51,13 +51,7 @@ class _CommentPageState extends State<CommentPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: SocialPostWidget(
-                userName: post.userName,
-                postTime: post.postTime,
-                postText: post.postText,
-                imageUrl: post.imageUrl,
-                post: post,
-              ),
+              child: PostWidget(post: post)
             ),
             const Divider(),
             const Padding(

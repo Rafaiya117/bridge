@@ -186,10 +186,9 @@ class _CommentBubbleState extends State<CommentBubble> {
                     backgroundImage: NetworkImage(reply.userAvatarUrl),
                   ),
                   const SizedBox(width: 8),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 180),
+                  Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(10),

@@ -6,9 +6,11 @@ import 'package:tha_bridge/features/auths/reset_password.dart';
 import 'package:tha_bridge/features/ladndingpage.dart';
 import 'package:tha_bridge/features/landing_page_tow.dart';
 import 'package:tha_bridge/features/auths/sign_up.dart';
+import 'package:tha_bridge/features/pages/comment_page.dart';
+import 'package:tha_bridge/features/pages/create_new_post.dart';
 import 'package:tha_bridge/features/pages/feed.dart';
-import 'package:tha_bridge/features/pages/post_with_comment_page.dart';
 import 'package:tha_bridge/model/PostModel.dart';
+
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -49,14 +51,10 @@ final GoRouter appRouter = GoRouter(
       path: '/comment_page',
       builder: (context,state)=>const CommentPage(),
     ),
-    // GoRoute(
-    //   path: '/comment_page',
-    //   builder: (context, state) {
-    //     final post = state.extra as Post;
-    //     return CommentPage(post: post);
-    //   },
-    // ),
-
+    GoRoute(
+      path: '/new_post',
+      builder: (context,state)=>const CreateNewPost(),
+    ),
   ],
 );
 
