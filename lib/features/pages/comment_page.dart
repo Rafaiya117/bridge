@@ -50,7 +50,7 @@ class _CommentPageState extends State<CommentPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(12.0),
               child: PostWidget(post: post)
             ),
             const Divider(),

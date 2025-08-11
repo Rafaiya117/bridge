@@ -25,7 +25,7 @@ class ReusableBottomNavBar extends StatelessWidget {
       context: context,
       removeBottom: true,
       child: Container(
-        height: 80,
+        height: 100,
         color: Color(0xFF72BE20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,7 +37,7 @@ class ReusableBottomNavBar extends StatelessWidget {
               child: SizedBox(
                 width: 60,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     // 🔼 Indicator bar on top
                     if (isSelected)
@@ -52,14 +52,14 @@ class ReusableBottomNavBar extends StatelessWidget {
                     else
                       SizedBox(height: 5),
 
-                    const SizedBox(height: 6), // Spacing between indicator and icon
+                    const SizedBox(height: 6),
 
-                    // Icon itself
                     Icon(
                       icons[index],
                       size: iconSize,
                       color: isSelected ? selectedColor : iconColor,
                     ),
+
                   ],
                 ),
               ),

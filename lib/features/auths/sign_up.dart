@@ -91,7 +91,9 @@ class SignUpPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: GradientButton(
                     text: 'Become',
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/mirrorpage');
+                    },
                   ),
                 ),
                 SizedBox(height: 15.h),

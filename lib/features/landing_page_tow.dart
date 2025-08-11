@@ -33,8 +33,8 @@ class LandingPageTow extends StatelessWidget {
           ),
           Positioned(
             top:430.h,
-            left: 30.w,
-            right: 0,
+            left: 10.w,
+            right: 10,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class LandingPageTow extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w600,
-                    fontSize: 40.sp,
+                    fontSize: 35.sp,
                     height: 1.25,
                     letterSpacing: 0,
                     color: Color(0xFF009038),
@@ -134,7 +134,7 @@ class LandingPageTow extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20.w),
+                    SizedBox(width: 45.w),
                     Container(
                       width: 150.w,
                       decoration: BoxDecoration(

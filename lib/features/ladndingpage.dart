@@ -26,25 +26,30 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFD3EBBA),
-      body: Column(
-        children: [
-          const Spacer(),
-          Image.asset(
-            'assets/images/logo.png',
-            width: 357.w,
-            height: 261.h,
-            fit: BoxFit.contain,
-          ),
-          const Spacer(), // Push slider to bottom
-          Padding(
-            padding: EdgeInsets.only(bottom: 40.h),
-            child: SizedBox(
-              width: 340.w,
-              height: 60.h,
-              child: const SelfLoveSlider(),
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 100.h),
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: 320.w,
+                  height: 220.h,
+                  fit: BoxFit.contain,
+                ),
+                const Spacer(), // pushes slider down dynamically
+                SizedBox(
+                  width: 320.w,
+                  height: 60.h,
+                  child: const SelfLoveSlider(),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

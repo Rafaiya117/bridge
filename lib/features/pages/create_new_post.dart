@@ -11,12 +11,14 @@ class CreateNewPost extends StatefulWidget {
 
 class _CreateNewPostState extends State<CreateNewPost> {
 
-  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+  List<String> dropdownOptions = ['Private', 'Public'];
+  String selectedValue = 'Private';
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         toolbarHeight: 100,
@@ -42,44 +44,103 @@ class _CreateNewPostState extends State<CreateNewPost> {
           ],
         ),
       ),
-      body:  Container(
-        height: double.infinity,
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child:Row(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile row
+              Row(
                 children: [
-                  ClipOval(
-                    child:Image.network(
-                      "https://randomuser.me/api/portraits/women/44.jpg",
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.fill,
-                    ) ,
+                  // Avatar
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage: AssetImage('assets/avatar.jpg'), // Replace with actual asset
                   ),
-                  SizedBox(width:10.w),
+                  SizedBox(width: 10),
+                  // Name and dropdown
                   Text(
-                    "Sumita",
-                    style: TextStyle(
-                      fontFamily: "Roboto",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16
+                    'Sumit',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: selectedValue,
+                        icon: Icon(Icons.arrow_drop_down),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedValue = newValue!;
+                          });
+                        },
+                        items: dropdownOptions.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    ),
+                  Spacer(),
+                  // Media button
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    child: Row(
+                      children: [
+                        Icon(Icons.image, color: Colors.white, size: 16),
+                        SizedBox(width: 4),
+                        Text(
+                          'Media',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: "What's on your mind?",
-                border: InputBorder.none,
+              SizedBox(height: 20),
+              // TextField
+              TextField(
+                decoration: InputDecoration.collapsed(
+                  hintText: "What's on your mind?",
+                  hintStyle: TextStyle(fontSize: 16),
+                ),
+                maxLines: 10,
               ),
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
+              Spacer(),
+              // Post Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    'Post Now',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
