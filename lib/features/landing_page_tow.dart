@@ -10,33 +10,31 @@ class LandingPageTow extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-         Positioned(
-           top: 0,
-           left: 0,
-           right: 0,
-           //height: 0.5.sh,
-             child: Image.asset(
-               'assets/images/Vector_34.png',
-               fit: BoxFit.cover,
-             ),
-           ),
           Positioned(
-            top: 55.h,
-            left: 0.w,
+            top: 0,
+            left: 0,
             right: 0,
             child: Image.asset(
-              'assets/images/amico.png',
-              width: 297.72.w,
-              height: 275.75.h,
-              //fit: BoxFit.contain,
+              'assets/images/Vector_34.png',
+              //width: 709.w, // from spec
+              //height: 474.h, // from spec
+              fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top:430.h,
+            top: 58.h, // from spec
+            left: 39.w, // from spec
+            child: Image.asset(
+              'assets/images/amico.png',
+              width: 297.7186.w, // from spec
+              height: 275.7491.h, // from spec
+            ),
+          ),
+          Positioned(
+            top: 430.h,
             left: 10.w,
             right: 10,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -44,24 +42,21 @@ class LandingPageTow extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w600,
-                    fontSize: 35.sp,
-                    height: 1.25,
+                    fontSize: 40.sp, // from spec
+                    height: 50 / 40, // line-height ratio from spec
                     letterSpacing: 0,
                     color: Color(0xFF009038),
                   ),
-                  textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 20.h),
                 RichText(
-                  textAlign: TextAlign.left,
                   text: TextSpan(
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
                       fontSize: 14.sp,
                       height: 1.5,
-                      letterSpacing: 0,
-                      color: Colors.black, // default text color
+                      color: Colors.black,
                     ),
                     children: [
                       const TextSpan(text: 'Your '),
@@ -79,7 +74,9 @@ class LandingPageTow extends StatelessWidget {
                         text: 'guidance',
                         style: TextStyle(color: Color(0xFF009038)),
                       ),
-                      const TextSpan(text: ', and a supportive community to help you\n stay balanced and inspired'),
+                      const TextSpan(
+                          text:
+                          ', and a supportive community to help you\n stay balanced and inspired'),
                     ],
                   ),
                 ),
@@ -94,7 +91,6 @@ class LandingPageTow extends StatelessWidget {
                     letterSpacing: 0,
                     color: Color(0xFF009038),
                   ),
-                  textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 20.h),
                 Row(
@@ -126,7 +122,8 @@ class LandingPageTow extends StatelessWidget {
                           child: Text(
                             "Log In",
                             style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 20.sp, // from spec
+                              height: 50 / 40, // from spec
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
@@ -163,7 +160,8 @@ class LandingPageTow extends StatelessWidget {
                           child: Text(
                             "Walk",
                             style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 20.sp, // from spec
+                              height: 50 / 40, // from spec
                               fontWeight: FontWeight.w600,
                               color: Colors.black,
                             ),

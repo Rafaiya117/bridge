@@ -24,9 +24,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             child: Center(
               child: Column(
                 children: [
-                  Image.asset('assets/images/logo.png'),
+                  Image.asset(
+                    'assets/images/logo.png',
+                    width: 247,
+                    height: 181,
+                  ),
                   SizedBox(height: 20.h),
-                  Image.asset('assets/images/lock.png'),
+                  Image.asset(
+                    'assets/images/lock.png',
+                    width: 201,
+                    height: 100,
+                  ),
+
                   SizedBox(height: 65.h),
                   CustomInputField(
                     label: 'User Email',
@@ -37,12 +46,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Center(
-                      child: GradientButton(
-                        text: 'Verify',
-                        //width: 800,
-                        onPressed: () {
-                          context.go('/otp_page');
-                        },
+                      child: SizedBox(
+                        width: 348,
+                        height: 50,
+                        child: GradientButton(
+                          text: 'Verify',
+                          onPressed: () {
+                            context.go('/otp_page');
+                          },
+                        ),
                       ),
                     ),
                   ),

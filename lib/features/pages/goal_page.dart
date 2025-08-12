@@ -114,7 +114,9 @@ class GoalPage extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/set_goal_page');
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: greenColor,
                       shape: RoundedRectangleBorder(

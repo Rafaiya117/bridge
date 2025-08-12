@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tha_bridge/features/pages/chat_details_page.dart';
 
 class WalkingChatPage extends StatelessWidget {
   final List<Map<String, dynamic>> users = [
@@ -71,7 +73,9 @@ class WalkingChatPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.add, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              context.go('/chatlist');
+            },
           )
         ],
       ),
@@ -96,10 +100,13 @@ class WalkingChatPage extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemCount: users.length,
-              separatorBuilder: (_, __) => Divider(height: 1),
+              separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final user = users[index];
                 return ListTile(
+                  onTap: () {
+                   context.go('/chat_details');
+                  },
                   leading: user.containsKey('image')
                       ? Stack(
                     children: [
@@ -127,7 +134,7 @@ class WalkingChatPage extends StatelessWidget {
                     backgroundColor: user['color'] ?? Colors.grey,
                     child: Text(
                       user['initials'],
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                   title: Text(user['name']),
@@ -137,13 +144,13 @@ class WalkingChatPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(user['date']),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       CircleAvatar(
                         radius: 10,
                         backgroundColor: Colors.green,
                         child: Text(
                           '${user['unread']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12,
                           ),

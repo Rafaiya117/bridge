@@ -28,38 +28,51 @@ class LoginPage extends StatelessWidget {
                   Center(
                     child: Image.asset(
                       'assets/images/logo.png',
-                      height: 200.h,
+                      width: 290.w,
+                      height: 212.h,
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  CustomInputField(
-                    label: 'User Email',
-                    hintText: 'muffinworks@gmail.com',
-                    controller: emailController,
+                  SizedBox(
+                    width: 348,
+                    height: 60,
+                    child: CustomInputField(
+                      label: 'User Email',
+                      hintText: 'muffinworks@gmail.com',
+                      controller: emailController,
+                    ),
                   ),
                   SizedBox(height: 20.h),
-                  CustomInputField(
-                    label: 'Password',
-                    hintText: '',
-                    controller: passwordController,
-                    suffixIcon: Icon(Icons.visibility_off),
+                  SizedBox(
+                    width: 348,
+                    height: 60,
+                    child: CustomInputField(
+                      label: 'Password',
+                      hintText: '',
+                      controller: passwordController,
+                      suffixIcon: Icon(Icons.visibility_off),
+                    ),
                   ),
                   SizedBox(height: 20.h),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        context.push('/forgot_password');
-                      },
-                      child: Text(
-                        "Forgot Password",
-                        style: TextStyle(
-                          fontFamily: "Roboto",
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFFFF0000),
+                    child: SizedBox(
+                      height: 20,
+                      width: 106,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.push('/forgot_password');
+                        },
+                        child: Text(
+                          "Forgot Password",
+                          style: TextStyle(
+                            fontFamily: "Roboto",
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFFF0000),
+                          ),
+                          textAlign: TextAlign.right,
                         ),
-                        textAlign: TextAlign.right,
                       ),
                     ),
                   ),
@@ -109,11 +122,15 @@ class LoginPage extends StatelessWidget {
               // Bottom part
               Column(
                 children: [
-                  GradientButton(
-                    text: 'Log In',
-                    onPressed: () {
-                      context.go('/feed');
-                    },
+                  SizedBox(
+                    width: 348,
+                    height: 55,
+                    child: GradientButton(
+                      text: 'Log In',
+                      onPressed: () {
+                        context.go('/feed');
+                      },
+                    ),
                   ),
                   SizedBox(height: 15.h),
                   Row(
