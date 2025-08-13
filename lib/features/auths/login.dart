@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tha_bridge/components/constant.dart';
 import 'package:tha_bridge/custom_widgets/custome_gradient_button.dart';
-import 'package:tha_bridge/custom_widgets/custome_input.dart';
+import 'package:tha_bridge/custom_widgets/custom_auth_widgets/custome_input.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -34,8 +34,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   SizedBox(
-                    width: 348,
-                    height: 60,
+                    width: 348.w,
+                    height: 60.h,
                     child: CustomInputField(
                       label: 'User Email',
                       hintText: 'muffinworks@gmail.com',
@@ -44,8 +44,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   SizedBox(
-                    width: 348,
-                    height: 60,
+                    width: 348.w,
+                    height: 60.h,
                     child: CustomInputField(
                       label: 'Password',
                       hintText: '',
@@ -67,11 +67,11 @@ class LoginPage extends StatelessWidget {
                           "Forgot Password",
                           style: TextStyle(
                             fontFamily: "Roboto",
-                            fontSize: 14.sp,
+                            fontSize: 10.sp,
                             fontWeight: FontWeight.w400,
                             color: Color(0xFFFF0000),
                           ),
-                          textAlign: TextAlign.right,
+                          //textAlign: TextAlign.right,
                         ),
                       ),
                     ),
@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
               Column(
                 children: [
                   SizedBox(
-                    width: 348,
+                    width: 348.w,
                     height: 55,
                     child: GradientButton(
                       text: 'Log In',

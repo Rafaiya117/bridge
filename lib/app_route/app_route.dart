@@ -26,9 +26,9 @@ import 'package:tha_bridge/features/pages/notificationpage.dart';
 import 'package:tha_bridge/features/pages/privacy_policypage.dart';
 import 'package:tha_bridge/features/pages/term_service.dart';
 import 'package:tha_bridge/features/pages/walk_page.dart';
-import 'package:tha_bridge/features/pages/walking.dart' hide WalkPage;
+import 'package:tha_bridge/features/pages/walking.dart';
 import 'package:tha_bridge/features/pages/walking_chat_group.dart';
-import 'package:tha_bridge/model/PostModel.dart';
+
 
 
 final GoRouter appRouter = GoRouter(
@@ -68,10 +68,10 @@ final GoRouter appRouter = GoRouter(
           path: '/feed',
           builder: (_, __) => FeedPage(),
         ),
-        GoRoute(
-          path: '/comments',
-          builder: (_, __) => const CommentPage(),
-        ),
+        // GoRoute(
+        //   path: '/comments',
+        //   builder: (_, __) => const CommentPage(),
+        // ),
         GoRoute(
           path: '/new_post',
           builder: (_, __) => const CreateNewPost(),

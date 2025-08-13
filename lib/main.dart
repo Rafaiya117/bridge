@@ -1,12 +1,24 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:tha_bridge/app_route/app_route.dart';
 import 'package:tha_bridge/app_route/no_connectivity/no_internet_connectivity.dart';
+import 'package:tha_bridge/provider/note_provider.dart';
+import 'package:tha_bridge/provider/post_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PostProvider()..loadPosts()),
+        ChangeNotifierProvider(create: (_) => NoteProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

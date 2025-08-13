@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SelfLoveSlider extends StatefulWidget {
   const SelfLoveSlider({super.key});
@@ -38,10 +39,10 @@ class _SelfLoveSliderState extends State<SelfLoveSlider> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: knobSize), // Reserve knob space
-                  const Text(
+                  SizedBox(width: knobSize),
+                  Text(
                     "Self Love",
-                    style: TextStyle(
+                    style: GoogleFonts.philosopher(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Colors.black87,

@@ -31,7 +31,9 @@ class _DemoPageState extends State<DemoPage> {
             width: double.infinity,
             height: double.infinity,
           ),
-          Positioned(
+          Align(
+            alignment: Alignment.center,
+            child:Positioned(
             top: 256.0,
             left: 9.0,
             child: Image.asset(
@@ -40,6 +42,7 @@ class _DemoPageState extends State<DemoPage> {
               height: 261.0,
             ),
           ),
+          )
         ],
       ),
     );

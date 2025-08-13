@@ -16,18 +16,16 @@ class LandingPageTow extends StatelessWidget {
             right: 0,
             child: Image.asset(
               'assets/images/Vector_34.png',
-              //width: 709.w, // from spec
-              //height: 474.h, // from spec
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top: 58.h, // from spec
-            left: 39.w, // from spec
+            top: 58.h, 
+            left: 39.w,
             child: Image.asset(
               'assets/images/amico.png',
-              width: 297.7186.w, // from spec
-              height: 275.7491.h, // from spec
+              width: 297.7186.w,
+              height: 275.7491.h,
             ),
           ),
           Positioned(
@@ -42,8 +40,8 @@ class LandingPageTow extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w600,
-                    fontSize: 40.sp, // from spec
-                    height: 50 / 40, // line-height ratio from spec
+                    fontSize: 40.sp, 
+                    height: 50 / 40,
                     letterSpacing: 0,
                     color: Color(0xFF009038),
                   ),
@@ -75,8 +73,7 @@ class LandingPageTow extends StatelessWidget {
                         style: TextStyle(color: Color(0xFF009038)),
                       ),
                       const TextSpan(
-                          text:
-                          ', and a supportive community to help you\n stay balanced and inspired'),
+                          text:', and a supportive community to help you\n stay balanced and inspired'),
                     ],
                   ),
                 ),
@@ -122,8 +119,9 @@ class LandingPageTow extends StatelessWidget {
                           child: Text(
                             "Log In",
                             style: TextStyle(
-                              fontSize: 20.sp, // from spec
-                              height: 50 / 40, // from spec
+                              fontFamily: "Roboto",
+                              fontSize: 20.sp,
+                              height: 50 / 40, 
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
@@ -147,7 +145,9 @@ class LandingPageTow extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go('/signup');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
@@ -160,8 +160,9 @@ class LandingPageTow extends StatelessWidget {
                           child: Text(
                             "Walk",
                             style: TextStyle(
-                              fontSize: 20.sp, // from spec
-                              height: 50 / 40, // from spec
+                              fontFamily: "Roboto",
+                              fontSize: 20.sp, 
+                              height: 50 / 40,
                               fontWeight: FontWeight.w600,
                               color: Colors.black,
                             ),

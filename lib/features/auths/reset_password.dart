@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tha_bridge/components/constant.dart';
 import 'package:tha_bridge/custom_widgets/custome_gradient_button.dart';
-import 'package:tha_bridge/custom_widgets/custome_input.dart';
+import 'package:tha_bridge/custom_widgets/custom_auth_widgets/custome_input.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -29,18 +29,26 @@ class _ResetPasswordState extends State<ResetPassword> {
                   SizedBox(height: 20.h),
                   Image.asset('assets/images/reset_pass.png'),
                   SizedBox(height: 50.h),
-                  CustomInputField(
-                      label: 'Password',
-                      hintText: '',
-                      controller:passwordController ,
-                     suffixIcon: Icon(Icons.visibility_off),
+                  SizedBox(
+                    width: 348.w,
+                    height: 60.h,
+                    child: CustomInputField(
+                        label: 'Password',
+                        hintText: '',
+                        controller:passwordController ,
+                       suffixIcon: Icon(Icons.visibility_off),
+                    ),
                   ),
                   SizedBox(height: 20.h,),
-                  CustomInputField(
-                    label: 'Confirm Password',
-                    hintText: '',
-                    controller:confirm_passwordController,
-                    suffixIcon: Icon(Icons.visibility_off),
+                  SizedBox(
+                    width: 348.w,
+                    height: 60.h,
+                    child: CustomInputField(
+                      label: 'Confirm Password',
+                      hintText: '',
+                      controller:confirm_passwordController,
+                      suffixIcon: Icon(Icons.visibility_off),
+                    ),
                   ),
                   SizedBox(height: 30.h,),
                   GradientButton(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tha_bridge/custom_widgets/custom_slider_button.dart';
+import 'package:tha_bridge/custom_widgets/custom_auth_widgets/custom_slider_button.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -10,22 +10,10 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  bool _confirmed = false;
-
-  final double sliderWidth = 300.w;
-  final double sliderHeight = 65.h;
-  final double knobSize = 65.w;
-
-  void _onSlideEnd() {
-    setState(() {
-      _confirmed = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color(0xFFD3EBBA),
       body:  Stack(
         children: [
           Image.asset(
