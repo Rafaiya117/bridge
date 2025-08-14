@@ -144,6 +144,7 @@ class _ChatVideoBubbleState extends State<ChatVideoBubble> {
   @override
   void initState() {
     super.initState();
+    // ignore: deprecated_member_use
     _videoController = VideoPlayerController.network(widget.videoUrl)
       ..initialize().then((_) {
         setState(() {});

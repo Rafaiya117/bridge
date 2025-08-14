@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOtpField extends StatefulWidget {
   final int numberOfFields;
@@ -92,7 +90,6 @@ class CustomOtpFieldState extends State<CustomOtpField> {
                 } else if (value.isEmpty && index > 0) {
                   FocusScope.of(context).requestFocus(focusNodes[index - 1]);
                 }
-
                 _checkCompletion();
               },
             ),

@@ -1,22 +1,39 @@
 [
   {
+    "id": "1",
     "username": "Sumit Vondo",
     "timeAgo": "1 hour ago",
-    "text": "In today's fast-paced world, mental health is more important than ever – yet finding accessible, meaningful support remains a challenge. That's why we've created a digital platform that bridges the gap between social connection and mental wellness.",
+    "text": "In today's fast-paced world...",
     "imageUrls": [
       "https://img.freepik.com/premium-photo/peaceful-energetic-scene-morning-wellness-routine-perfect-promoting-healthy-living_1218920-89.jpg?w=360"
     ],
     "tag": null,
     "likeCount": 100,
-    "isLiked": false
+    "isLiked": false,
+    "comments": [
+      {
+        "userName": "Alice",
+        "text": "This project idea sounds amazing! Combining social media with mental health support is something we truly need right now."
+      },
+      {
+        "userName": "Bob",
+        "text": "Thanks for sharing!"
+      },
+      {
+        "userName": "Charlie",
+        "text": "Looking forward to seeing more updates on this."
+      }
+    ]
   },
   {
+    "id": "2",
     "username": "Sumit",
     "timeAgo": "2 hours ago",
     "text": "Here's another post without images.",
     "imageUrls": [],
     "tag": "Work",
     "likeCount": 42,
-    "isLiked": true
+    "isLiked": true,
+    "comments": []
   }
 ]

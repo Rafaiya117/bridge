@@ -50,16 +50,17 @@ class _FeedPageState extends State<FeedPage> {
         ),
       ),
       body: ListView(
-  padding: const EdgeInsets.all(16),
-  children: [
-    NoteSection(notes: notes),
-    const SizedBox(height: 10),
+          padding: const EdgeInsets.all(16),
+            children: [
+            NoteSection(notes: notes),
+            //SizedBox(height: 10.h),
     ...List.generate(postProvider.posts.length * 2 - 1, (index) {
       final itemIndex = index ~/ 2;
       if (index.isEven) {
         final post = postProvider.posts[itemIndex];
         return PostWidget(
           context: context,
+          id: post.id,
           username: post.username,
           timeAgo: post.timeAgo,
           text: post.text,

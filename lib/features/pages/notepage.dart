@@ -36,9 +36,7 @@ class _NotePageState extends State<NotePage> {
           ),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              // Handle back button
-            },
+            onPressed: () {},
           ),
         ),
         title: const Text(
@@ -55,7 +53,6 @@ class _NotePageState extends State<NotePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Title TextField
             TextField(
               decoration: InputDecoration(
                 hintText: 'Title',
@@ -65,18 +62,16 @@ class _NotePageState extends State<NotePage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Note Text
             TextFormField(
-              maxLines: null, // Allows multi-line input
+              maxLines: null,
               decoration: const InputDecoration(
                 hintText: 'Write your note here...',
                 hintStyle: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                 ),
-                border: InputBorder.none, // No border to match the original UI
-                contentPadding: EdgeInsets.zero, // Matches plain Text appearance
+                border: InputBorder.none, 
+                contentPadding: EdgeInsets.zero,
               ),
               style: const TextStyle(
                 fontSize: 16,
@@ -84,17 +79,12 @@ class _NotePageState extends State<NotePage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Row with Image Picker and Selected Image
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Selected Image Preview
                 if (_selectedImage != null)
                   GestureDetector(
-                    onTap: () {
-                      // Optional: Show preview, remove image, etc.
-                    },
+                    onTap: () {},
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.file(
@@ -128,8 +118,6 @@ class _NotePageState extends State<NotePage> {
               ],
             ),
             const SizedBox(height: 120),
-
-            // Add Note Button
             SizedBox(
               height: 50,
               child: ElevatedButton(
@@ -142,7 +130,7 @@ class _NotePageState extends State<NotePage> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.of(context).pop(); 
                           },
                           child: const Text('OK'),
                         ),

@@ -11,7 +11,7 @@ class NoteBubble extends StatelessWidget {
     return CustomPaint(
       painter: BubblePainter(),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 10),
         constraints: BoxConstraints(
           minWidth: 60.w,
           minHeight: 36.h,

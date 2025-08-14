@@ -14,7 +14,7 @@ class NoteSection extends StatelessWidget {
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: notes.length,
-      separatorBuilder: (_, __) => const SizedBox(width: 23),
+      separatorBuilder: (_, __) => const SizedBox(width: 12),
       itemBuilder: (context, index) {
         final note = notes[index];
         return Column(

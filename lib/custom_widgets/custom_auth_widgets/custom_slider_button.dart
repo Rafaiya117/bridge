@@ -27,7 +27,6 @@ class _SelfLoveSliderState extends State<SelfLoveSlider> {
 
         return Stack(
           children: [
-            // Background
             Container(
               width: sliderWidth,
               height: sliderHeight,
@@ -85,7 +84,7 @@ class _SelfLoveSliderState extends State<SelfLoveSlider> {
                     shape: BoxShape.circle,
                     color: Color(0xFF009038),
                   ),
-                  child: const Icon(Icons.chevron_right, color: Colors.white),
+                  child:Icon(Icons.chevron_right, color: Colors.white,size: 35.sp,),
                 ),
               ),
             ),

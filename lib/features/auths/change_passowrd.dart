@@ -23,7 +23,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with icon and text
             Row(
               children: [
                 Container(
@@ -176,9 +175,3 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: ChangePasswordPage(),
-    debugShowCheckedModeBanner: false,
-  ));
-}

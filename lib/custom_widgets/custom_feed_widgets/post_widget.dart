@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tha_bridge/model/PostModel.dart';
 
-class PostWidget extends StatelessWidget {
+class PostWidget extends StatefulWidget {
   final BuildContext context;
+  final String id; // <-- add this
   final String username;
   final String timeAgo;
   final String text;
@@ -16,6 +18,7 @@ class PostWidget extends StatelessWidget {
   const PostWidget({
     super.key,
     required this.context,
+    required this.id, // <-- add this
     required this.username,
     required this.timeAgo,
     required this.text,
@@ -27,9 +30,31 @@ class PostWidget extends StatelessWidget {
   });
 
   @override
+  State<PostWidget> createState() => _PostWidgetState();
+}
+class _PostWidgetState extends State<PostWidget> {
+  late int _likeCount;
+  late bool _isLiked;
+  @override
+  void initState() {
+    super.initState();
+    _likeCount = widget.likeCount;
+    _isLiked = widget.isLiked;
+  }
+
+  void _toggleLike() {
+    setState(() {
+      _isLiked = !_isLiked;
+      _likeCount += _isLiked ? 1 : -1;
+    });
+
+    widget.toggleLike();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,12 +71,12 @@ class PostWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(username, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(timeAgo, style: const TextStyle(color: Colors.grey)),
+                    Text(widget.username, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(widget.timeAgo, style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),
-              if (tag != null)
+              if (widget.tag != null)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
@@ -60,7 +85,7 @@ class PostWidget extends StatelessWidget {
                     border: Border.all(color: const Color(0xFF1AA260)),
                   ),
                   child: Text(
-                    tag!,
+                    widget.tag!,
                     style: const TextStyle(
                       color: Color(0xFF1AA260),
                       fontWeight: FontWeight.w500,
@@ -71,19 +96,19 @@ class PostWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            text,
+            widget.text,
             style: const TextStyle(fontSize: 14.5, height: 1.4),
           ),
-          if (imageUrls != null && imageUrls!.isNotEmpty) ...[
+          if (widget.imageUrls != null && widget.imageUrls!.isNotEmpty) ...[
             const SizedBox(height: 10),
             SizedBox(
               height: 155,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: imageUrls!.length,
+                itemCount: widget.imageUrls!.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 10),
                 itemBuilder: (context, index) {
-                  final url = imageUrls![index];
+                  final url = widget.imageUrls![index];
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
@@ -99,11 +124,11 @@ class PostWidget extends StatelessWidget {
           const SizedBox(height: 10),
           Row(
             children: [
-              const Icon(Icons.favorite, color: Colors.green, size: 18),
+              Icon(Icons.favorite, color: _isLiked ? Colors.green : Colors.grey, size: 18),
               const SizedBox(width: 4),
               Text(
-                "$likeCount People like this post",
-                style: const TextStyle(color: Colors.green),
+                "$_likeCount People like this post",
+                style: TextStyle(color: _isLiked ? Colors.green : Colors.grey),
               ),
             ],
           ),
@@ -112,23 +137,24 @@ class PostWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildActionButton(
-                icon: isLiked ? Icons.favorite : Icons.favorite_border,
+                icon: _isLiked ? Icons.favorite : Icons.favorite_border,
                 label: 'Love',
-                onTap: toggleLike,
-                color: isLiked ? Colors.green : Colors.black,
+                onTap: _toggleLike,
+                color: _isLiked ? const Color.fromARGB(255, 241, 23, 23) : Colors.black,
               ),
-              _buildActionButton(
-                icon: Icons.comment_outlined,
-                label: 'Comment',
-                onTap: () {
-                  this.context.go('/comments');
-                },
-              ),
+             _buildActionButton(
+              icon: Icons.comment_outlined,
+              label: 'Comment',
+              onTap: () {
+              widget.context.go('/comments/${widget.id}');
+            },
+           ),
+
               _buildActionButton(
                 icon: Icons.repeat,
                 label: 'Repost',
                 onTap: () {
-                  this.context.go('/repost');
+                  widget.context.go('/repost');
                 },
               ),
             ],

@@ -7,11 +7,9 @@ class GoalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Colors from the image
     const greenColor = Color(0xFF3C9B0D);
     const lightGreen = Color(0xFFB8DC8A);
 
-    // Sample goal items
     final goals = [
       GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
       GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
@@ -43,7 +41,6 @@ class GoalPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
-              // Top row with icons and Create a Goal button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,7 +82,6 @@ class GoalPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    // Close Icon (top-right)
                                     Positioned(
                                       top: -5,
                                       right: -5,
@@ -132,20 +128,19 @@ class GoalPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Image with circular progress
               Stack(
                 alignment: Alignment.center,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(24),
                     child: Image.asset(
                       'assets/images/goal.jpg',
                       width: double.infinity,
-                      height: 150,
+                      height: 180,
                       fit: BoxFit.cover,
                     ),
                   ),
+
                   SizedBox(
                     width: 100,
                     height: 100,
@@ -153,54 +148,65 @@ class GoalPage extends StatelessWidget {
                       value: 0.5,
                       strokeWidth: 14,
                       backgroundColor: Colors.grey[300],
-                      valueColor: const AlwaysStoppedAnimation<Color>(greenColor),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        greenColor,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8, 
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 14,
+                              height: 14,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 2,
+                                ),
+                                color: greenColor,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            const Text(
+                              'Completed Goals (2)',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 11),
+                        Row(
+                          children: [
+                            Container(
+                              width: 14,
+                              height: 14,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 2,
+                                ),
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            const Text(
+                              'Incomplete Goals (2)',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-
-              // Completed and Incomplete goals info
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black, width: 2),
-                          color: greenColor,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      const Text('Completed Goals (2)'),
-                    ],
-                  ),
-                  const SizedBox(width: 11),
-                  Row(
-                    children: [
-                      Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black, width: 2),
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      const Text('Incomplete Goals (02)'),
-                    ],
-                  ),
-                ],
-              ),
-
               const SizedBox(height: 24),
-
-              // Header with "Be Prepared" and "Today" dropdown style
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -231,10 +237,7 @@ class GoalPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
-
-              // Goal list items
               Expanded(
                 child: ListView.separated(
                   itemCount: goals.length,
@@ -250,7 +253,6 @@ class GoalPage extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Circle indicator
                           Container(
                             width: 24,
                             height: 24,
@@ -273,7 +275,6 @@ class GoalPage extends StatelessWidget {
                                 : null,
                           ),
                           const SizedBox(width: 12),
-                          // Text info
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,7 +292,6 @@ class GoalPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // More dots icon
                           const Padding(
                             padding: EdgeInsets.only(top: 4),
                             child: Icon(Icons.more_horiz, size: 28),

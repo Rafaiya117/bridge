@@ -21,6 +21,7 @@ import 'package:tha_bridge/features/pages/guidancepage.dart';
 import 'package:tha_bridge/features/pages/help_&_support.dart';
 import 'package:tha_bridge/features/pages/journalpage.dart';
 import 'package:tha_bridge/features/pages/mirrorpage.dart';
+import 'package:tha_bridge/features/pages/motivation_page.dart';
 import 'package:tha_bridge/features/pages/notepage.dart';
 import 'package:tha_bridge/features/pages/notificationpage.dart';
 import 'package:tha_bridge/features/pages/privacy_policypage.dart';
@@ -28,6 +29,7 @@ import 'package:tha_bridge/features/pages/term_service.dart';
 import 'package:tha_bridge/features/pages/walk_page.dart';
 import 'package:tha_bridge/features/pages/walking.dart';
 import 'package:tha_bridge/features/pages/walking_chat_group.dart';
+import 'package:tha_bridge/model/PostModel.dart';
 
 
 
@@ -64,14 +66,26 @@ final GoRouter appRouter = GoRouter(
         return MainTabScaffold(child: child);
       },
       routes: [
-        GoRoute(
+         GoRoute(
+          path: '/video',
+          builder: (_, __) => VideoFeedPage(),
+        ),
+         GoRoute(
           path: '/feed',
           builder: (_, __) => FeedPage(),
         ),
+      
         // GoRoute(
-        //   path: '/comments',
-        //   builder: (_, __) => const CommentPage(),
+        //   path: '/feed',
+        //   builder: (_, __) => FeedPage(),
         // ),
+        GoRoute(
+          path: '/comments/:postId',
+          builder: (context, state) {
+          final postId = state.pathParameters['postId']!;
+          return CommentPage(postId: postId);
+       },
+      ),
         GoRoute(
           path: '/new_post',
           builder: (_, __) => const CreateNewPost(),

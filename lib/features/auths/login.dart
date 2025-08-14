@@ -6,99 +6,102 @@ import 'package:tha_bridge/components/constant.dart';
 import 'package:tha_bridge/custom_widgets/custome_gradient_button.dart';
 import 'package:tha_bridge/custom_widgets/custom_auth_widgets/custome_input.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool _isChecked = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool _isChecked = false;
     return Scaffold(
-      backgroundColor:AppColor.appColor,
+      backgroundColor: AppColor.appColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+          /////////  Top Section //////////
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(height: 30.h),
                   Center(
                     child: Image.asset(
                       'assets/images/logo.png',
                       width: 290.w,
                       height: 212.h,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  SizedBox(
-                    width: 348.w,
-                    height: 60.h,
-                    child: CustomInputField(
-                      label: 'User Email',
-                      hintText: 'muffinworks@gmail.com',
-                      controller: emailController,
-                    ),
+
+          ////////// Email Field //////////
+                  CustomInputField(
+                    label: 'User Email',
+                    hintText: 'muffinworks@gmail.com',
+                    controller: emailController,
                   ),
                   SizedBox(height: 20.h),
-                  SizedBox(
-                    width: 348.w,
-                    height: 60.h,
-                    child: CustomInputField(
-                      label: 'Password',
-                      hintText: '',
-                      controller: passwordController,
-                      suffixIcon: Icon(Icons.visibility_off),
-                    ),
+
+          ////////// Password Field /////////
+                  CustomInputField(
+                    label: 'Password',
+                    hintText: '',
+                    controller: passwordController,
+                    obscureText: true,
+                    suffixIcon: Icon(Icons.visibility_off),
                   ),
                   SizedBox(height: 20.h),
+
+          //////// Forgot Password  //////////
                   Align(
                     alignment: Alignment.centerRight,
-                    child: SizedBox(
-                      height: 20,
-                      width: 106,
-                      child: GestureDetector(
-                        onTap: () {
-                          context.push('/forgot_password');
-                        },
-                        child: Text(
-                          "Forgot Password",
-                          style: TextStyle(
-                            fontFamily: "Roboto",
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFFFF0000),
-                          ),
-                          //textAlign: TextAlign.right,
+                    child: GestureDetector(
+                      onTap: () => context.push('/forgot_password'),
+                      child: Text(
+                        "Forgot Password",
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.red,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 30.h),
-                  // Aligned Checkbox Row
+
+                  /// 🔹 Terms & Conditions Checkbox
                   Row(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Checkbox(
                         value: _isChecked,
                         onChanged: (bool? newValue) {
-                          // your logic
+                          setState(() => _isChecked = newValue ?? false);
                         },
-                        activeColor: _isChecked ? Color(0xFF009038) : Colors.white,
+                        activeColor: const Color(0xFF009038),
                         checkColor: Colors.white,
                       ),
                       Expanded(
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w400,
                               fontSize: 12.sp,
-                              height: 1.5,
-                              letterSpacing: 0,
                               color: Colors.black87,
+                              height: 1.5,
                             ),
                             children: [
                               const TextSpan(text: 'By Signing up, You’re agree to our '),
@@ -119,52 +122,53 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              // Bottom part
+
+              /// 🔹 Bottom Section
               Column(
                 children: [
+                  /// 🔹 Login Button
                   SizedBox(
-                    width: 348.w,
-                    height: 55,
+                    width: double.infinity,
+                    height: 55.h,
                     child: GradientButton(
                       text: 'Log In',
                       onPressed: () {
-                        context.go('/feed');
+                        context.go('/video');
                       },
                     ),
                   ),
                   SizedBox(height: 15.h),
+
+                  /// 🔹 Social Media Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/gmail.png'),
-                      SizedBox(width: 20.h),
+                      SizedBox(width: 20.w),
                       Image.asset('assets/images/Apple.png'),
                     ],
                   ),
                   SizedBox(height: 15.h),
+
+                  /// 🔹 Sign Up Navigation
                   Text.rich(
                     TextSpan(
                       text: "Don't have an account? ",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.black87),
                       children: [
                         TextSpan(
                           text: 'Sign In',
                           style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.normal,
                             decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              context.go('/signup');
-                            },
+                            ..onTap = () => context.go('/signup'),
                         ),
                       ],
                     ),
                   ),
+                  SizedBox(height: 20.h),
                 ],
               ),
             ],
