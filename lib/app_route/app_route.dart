@@ -24,6 +24,7 @@ import 'package:tha_bridge/features/pages/mirrorpage.dart';
 import 'package:tha_bridge/features/pages/motivation_page.dart';
 import 'package:tha_bridge/features/pages/notepage.dart';
 import 'package:tha_bridge/features/pages/notificationpage.dart';
+import 'package:tha_bridge/features/pages/personal_post.dart';
 import 'package:tha_bridge/features/pages/privacy_policypage.dart';
 import 'package:tha_bridge/features/pages/term_service.dart';
 import 'package:tha_bridge/features/pages/walk_page.dart';
@@ -59,6 +60,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/walking', builder: (_, __) => WalkingPage()),
     GoRoute(path: '/walk', builder: (_, __) => WalkPage()),
     GoRoute(path: '/set_goal_page', builder: (_, __) => SetGoalPage()),
+    GoRoute(path: '/own_profile', builder: (_, __) => OwnProfilePage()),
+    
 
     // ShellRoute: keeps bottom nav visible
     ShellRoute(
@@ -90,10 +93,18 @@ final GoRouter appRouter = GoRouter(
           path: '/new_post',
           builder: (_, __) => const CreateNewPost(),
         ),
+        // GoRoute(
+        //   path: '/goal',
+        //   builder: (_, __) => const GoalPage(),
+        // ),
         GoRoute(
           path: '/goal',
-          builder: (_, __) => const GoalPage(),
-        ),
+          builder: (context, state) {
+          final GoalItem? newGoal = state.extra as GoalItem?;
+          return GoalPage(newGoal: newGoal);
+        },
+      ),
+
         GoRoute(
           path: '/guidance',
           builder: (_, __) => const GuidancePage(),

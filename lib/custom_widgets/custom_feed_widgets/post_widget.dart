@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -100,27 +102,30 @@ class _PostWidgetState extends State<PostWidget> {
             style: const TextStyle(fontSize: 14.5, height: 1.4),
           ),
           if (widget.imageUrls != null && widget.imageUrls!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 155,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.imageUrls!.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 10),
-                itemBuilder: (context, index) {
-                  final url = widget.imageUrls![index];
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: SizedBox(
-                      width: 343.w,
-                      height: 155.h,
-                      child: Image.network(url, fit: BoxFit.cover),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+  const SizedBox(height: 10),
+  SizedBox(
+    height: 155,
+    child: ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: widget.imageUrls!.length,
+      separatorBuilder: (_, __) => const SizedBox(width: 10),
+      itemBuilder: (context, index) {
+        final url = widget.imageUrls![index];
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: SizedBox(
+            width: 343.w,
+            height: 155.h,
+            child: url.startsWith('http')
+                ? Image.network(url, fit: BoxFit.cover)
+                : Image.file(File(url), fit: BoxFit.cover), // <-- local file
+          ),
+        );
+      },
+    ),
+  ),
+],
+
           const SizedBox(height: 10),
           Row(
             children: [

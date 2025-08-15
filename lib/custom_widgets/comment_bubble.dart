@@ -31,6 +31,16 @@ class _CommentBubbleState extends State<CommentBubble> {
   final List<Reply> _replies = [];
   final String currentUserAvatar = 'https://i.pravatar.cc/150?img=5';
 
+   bool _isLiked = false;
+  int _likeCount = 0;
+
+  void _toggleLike() {
+  setState(() {
+    _isLiked = !_isLiked;
+    _likeCount += _isLiked ? 1 : -1;
+  }); 
+}
+
   @override
   void dispose() {
     _replyController.dispose();
@@ -105,7 +115,31 @@ class _CommentBubbleState extends State<CommentBubble> {
                     // Like and comment icons
                     Row(
                       children: [
-                        const Icon(Icons.thumb_up_alt_outlined, size: 20),
+                        GestureDetector(
+                        onTap: _toggleLike,
+                          child: Row(
+                            children: [
+                              Icon(
+                                _isLiked
+                                    ? Icons.thumb_up_alt
+                                    : Icons.thumb_up_alt_outlined,
+                                color: _isLiked ? Colors.blue : Colors.grey,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Like',
+                                style: TextStyle(
+                                  color: _isLiked ? Colors.blue : Colors.grey,
+                                  fontWeight: _isLiked
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
                         const SizedBox(width: 16),
                         // Comment icon with onTap
                         GestureDetector(

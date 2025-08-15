@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tha_bridge/custom_widgets/custom_time_picker.dart';
+import 'package:tha_bridge/features/pages/goal_page.dart';
 
 class SetGoalPage extends StatefulWidget {
   @override
@@ -192,7 +194,19 @@ class _SetGoalPageState extends State<SetGoalPage> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (taskController.text.isEmpty ||
+                        timeController.text.isEmpty) return;
+                      final newGoal = GoalItem(
+                        title: taskController.text,
+                        date: _selectedDay != null
+                            ? "${_selectedDay!.day} ${_selectedDay!.month} ${_selectedDay!.year}"
+                            : "${DateTime.now().day} ${DateTime.now().month} ${DateTime.now().year}",
+                        time: timeController.text,
+                        completed: false,
+                      );
+                      context.go('/goal', extra: newGoal);
+                    },
                     child: Text(
                       "Make A Goal",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),

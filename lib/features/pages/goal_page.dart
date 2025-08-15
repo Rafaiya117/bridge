@@ -2,26 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tha_bridge/components/topnav.dart';
 
-class GoalPage extends StatelessWidget {
-  const GoalPage({super.key});
+class GoalPage extends StatefulWidget {
+  final GoalItem? newGoal;
+  const GoalPage({super.key, this.newGoal});
+
+  @override
+  State<GoalPage> createState() => _GoalPageState();
+}
+
+class _GoalPageState extends State<GoalPage> {
+  static const greenColor = Color(0xFF3C9B0D);
+  static const lightGreen = Color(0xFFB8DC8A);
+
+  final List<String> options = ['Today', 'This week', 'This month'];
+  String selectedValue = 'Today'; // moved here for state
+  
+
+  final goals = [
+    GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
+    GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
+    GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
+    GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Add new goal if passed
+    if (widget.newGoal != null) {
+      goals.add(widget.newGoal!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    const greenColor = Color(0xFF3C9B0D);
-    const lightGreen = Color(0xFFB8DC8A);
-
-    final goals = [
-      GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
-      GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
-      GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
-      GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
-    ];
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        //toolbarHeight: 100,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Column(
@@ -41,6 +59,7 @@ class GoalPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
+              // Top row with icons & button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -68,9 +87,9 @@ class GoalPage extends StatelessWidget {
                                             width: 120,
                                           ),
                                           const SizedBox(height: 16),
-                                          Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: const Text(
+                                          const Padding(
+                                            padding: EdgeInsets.all(12.0),
+                                            child: Text(
                                               "We're Building Something\nAwesome for You!",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -110,8 +129,15 @@ class GoalPage extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      context.go('/set_goal_page');
+                    onPressed: () async {
+                      final newGoal = await context.push<GoalItem>(
+                        '/set_goal_page',
+                      );
+                      if (newGoal != null) {
+                        setState(() {
+                          goals.add(newGoal); // add it to the list
+                        });
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: greenColor,
@@ -128,11 +154,12 @@ class GoalPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+              // Goal progress stack
               Stack(
                 alignment: Alignment.center,
                 children: [
                   ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24),
                     child: Image.asset(
                       'assets/images/goal.jpg',
                       width: double.infinity,
@@ -140,7 +167,6 @@ class GoalPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                   SizedBox(
                     width: 100,
                     height: 100,
@@ -148,13 +174,11 @@ class GoalPage extends StatelessWidget {
                       value: 0.5,
                       strokeWidth: 14,
                       backgroundColor: Colors.grey[300],
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        greenColor,
-                      ),
+                      valueColor: const AlwaysStoppedAnimation<Color>(greenColor),
                     ),
                   ),
                   Positioned(
-                    bottom: 8, 
+                    bottom: 8,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -165,10 +189,7 @@ class GoalPage extends StatelessWidget {
                               height: 14,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 2,
-                                ),
+                                border: Border.all(color: Colors.black, width: 2),
                                 color: greenColor,
                               ),
                             ),
@@ -187,10 +208,7 @@ class GoalPage extends StatelessWidget {
                               height: 14,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 2,
-                                ),
+                                border: Border.all(color: Colors.black, width: 2),
                                 color: Colors.white,
                               ),
                             ),
@@ -207,6 +225,7 @@ class GoalPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
+              // Be Prepared row with dropdown
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -214,30 +233,59 @@ class GoalPage extends StatelessWidget {
                     'Be Prepared',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: greenColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Text(
-                          'Today',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                  GestureDetector(
+                    onTap: () async {
+                      final RenderBox renderBox = context.findRenderObject() as RenderBox;
+                      final Offset offset = renderBox.localToGlobal(Offset.zero);
+
+                      final selected = await showMenu<String>(
+                        context: context,
+                        position: RelativeRect.fromLTRB(
+                          offset.dx,
+                          offset.dy + renderBox.size.height,
+                          offset.dx + renderBox.size.width,
+                          offset.dy,
                         ),
-                        SizedBox(width: 4),
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                        ),
-                      ],
+                        items: options
+                            .map((e) => PopupMenuItem<String>(
+                                  value: e,
+                                  child: Text(e),
+                                ))
+                            .toList(),
+                      );
+
+                      if (selected != null) {
+                        setState(() {
+                          selectedValue = selected;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: greenColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            selectedValue,
+                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                          const SizedBox(width: 4),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
+              // Goals list
               Expanded(
                 child: ListView.separated(
                   itemCount: goals.length,
@@ -263,15 +311,15 @@ class GoalPage extends StatelessWidget {
                             ),
                             child: goal.completed
                                 ? Center(
-                              child: Container(
-                                width: 12,
-                                height: 12,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
+                                    child: Container(
+                                      width: 12,
+                                      height: 12,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
                                 : null,
                           ),
                           const SizedBox(width: 12),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WalkingPage extends StatelessWidget {
   final List<Map<String, String>> people = [
@@ -118,14 +119,20 @@ class WalkingPage extends StatelessWidget {
                             color: Color(0xFF007E33),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Text(
-                            'Walking',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
+                          child: GestureDetector(
+                            onTap: () {
+                              context.go('/own_profile'); 
+                            },
+                            child: Text(
+                              'Walking',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
+                          )
+
                         ),
                       ),
                       // Divider after each ListTile

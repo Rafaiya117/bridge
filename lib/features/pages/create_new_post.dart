@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:tha_bridge/components/topnav.dart';
+import 'package:tha_bridge/model/PostModel.dart';
+import 'package:tha_bridge/provider/post_provider.dart';
 
 class CreateNewPost extends StatefulWidget {
   const CreateNewPost({super.key});
@@ -17,7 +20,8 @@ class _CreateNewPostState extends State<CreateNewPost> {
   List<String> dropdownOptions = ['Private', 'Public'];
   String selectedValue = 'Private';
   List<File> _selectedImages = [];
-
+  TextEditingController _postTextController = TextEditingController();
+  
   Future<void> _pickImages() async {
     final List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
 
@@ -130,6 +134,7 @@ class _CreateNewPostState extends State<CreateNewPost> {
               SizedBox(height: 20),
               // TextField
               TextField(
+                controller: _postTextController,
                 decoration: InputDecoration.collapsed(
                   hintText: "What's on your mind?",
                   hintStyle: TextStyle(fontSize: 16),
@@ -194,7 +199,25 @@ class _CreateNewPostState extends State<CreateNewPost> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // handle post logic
+                  final postProvider = Provider.of<PostProvider>(
+                    context,listen: false,);
+                    final newPost = PostModel(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      username: 'Sumit',
+                      timeAgo: 'Just now',
+                      text: _postTextController.text,
+                      imageUrls: _selectedImages.map((f) => f.path).toList(),
+                      tag: selectedValue, 
+                      likeCount: 0, 
+                      isLiked: false,
+                    );
+
+                    postProvider.addPost(newPost);
+                    _postTextController.clear();
+                    setState(() {
+                      _selectedImages.clear();
+                    });
+                    context.go('/feed');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,

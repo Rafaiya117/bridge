@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:tha_bridge/components/topnav.dart';
 
-class GuidancePage extends StatelessWidget {
+class GuidancePage extends StatefulWidget {
   const GuidancePage({super.key});
+
+  @override
+  State<GuidancePage> createState() => _GuidancePageState();
+}
+
+class _GuidancePageState extends State<GuidancePage> {
+  bool showTherapist = true; // Toggle between Therapist & Life coach
 
   @override
   Widget build(BuildContext context) {
     // Colors from the image
     const greenColor = Color(0xffb5da73);
-    const darkGreenText = Color(0xff006400); // approx dark green for "Guidance & resources therapy"
+    const darkGreenText = Color(0xff006400);
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        //toolbarHeight: 100,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Column(
@@ -24,7 +30,8 @@ class GuidancePage extends StatelessWidget {
               secondIcon: Icons.notifications,
               firstIconColor: Colors.red,
               secondIconColor: Colors.black,
-              profileImageUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+              profileImageUrl:
+                  'https://randomuser.me/api/portraits/women/44.jpg',
             ),
           ],
         ),
@@ -62,81 +69,108 @@ class GuidancePage extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // Underlined guidance text
-              Text(
-                'Guidance & resources therapy',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: darkGreenText,
-                  decoration: TextDecoration.underline,
-                  fontSize: 16,
-                ),
+              // Two hyperlinks instead of single text
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => setState(() => showTherapist = true),
+                    child: Text(
+                      'Therapist',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: darkGreenText,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () => setState(() => showTherapist = false),
+                    child: Text(
+                      'Life coach',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: darkGreenText,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 15),
 
-              // User list
+              // User list or image based on selection
               Expanded(
-                child: ListView(
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: NetworkImage(
-                          'https://i.imgur.com/fG3JpXp.png', // Placeholder image similar to example
+                child: showTherapist
+                    ? ListView(
+                        children: [
+                          ListTile(
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundImage: NetworkImage(
+                                'https://i.imgur.com/fG3JpXp.png',
+                              ),
+                            ),
+                            title: const Text(
+                              'Jone',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Divider(height: 0),
+                          const ListTile(
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              'Makama',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Divider(height: 0),
+                          const ListTile(
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              'Ankama',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Divider(height: 0),
+                          const ListTile(
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              'mark',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Divider(height: 0),
+                          const ListTile(
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              'Maxilif',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Center(
+                        child: Image.asset(
+                          'assets/images/lifecoach.png', 
+                          width: 200,
                         ),
                       ),
-                      title: const Text(
-                        'Jone',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Divider(height: 0),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: const Text(
-                        'Makama',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Divider(height: 0),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: const Text(
-                        'Ankama',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Divider(height: 0),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: const Text(
-                        'mark',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Divider(height: 0),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: const Text(
-                        'Maxilif',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),

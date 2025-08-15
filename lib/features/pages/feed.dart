@@ -52,7 +52,43 @@ class _FeedPageState extends State<FeedPage> {
       body: ListView(
           padding: const EdgeInsets.all(16),
             children: [
-            NoteSection(notes: notes),
+            // NoteSection(notes: notes),
+            NoteSection(
+  notes: notes,
+  onAddNote: () async {
+    final textController = TextEditingController();
+
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Add Note'),
+        content: TextField(
+          controller: textController,
+          decoration: const InputDecoration(hintText: 'Type your note'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, textController.text),
+            child: const Text('Add'),
+          ),
+        ],
+      ),
+    );
+
+    if (result != null && result.trim().isNotEmpty) {
+      noteProvider.addNote({
+        'text': result,
+        'image': 'https://randomuser.me/api/portraits/men/20.jpg',
+      });
+    }
+  },
+),
+
+
             //SizedBox(height: 10.h),
     ...List.generate(postProvider.posts.length * 2 - 1, (index) {
       final itemIndex = index ~/ 2;
