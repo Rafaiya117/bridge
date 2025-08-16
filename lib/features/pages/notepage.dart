@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class NotePage extends StatefulWidget {
@@ -14,8 +14,9 @@ class _NotePageState extends State<NotePage> {
   File? _selectedImage;
 
   Future<void> _pickImage() async {
-    final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
 
     if (pickedFile != null) {
       setState(() {
@@ -36,7 +37,9 @@ class _NotePageState extends State<NotePage> {
           ),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              context.go('/journal_page');
+            },
           ),
         ),
         title: const Text(
@@ -66,17 +69,11 @@ class _NotePageState extends State<NotePage> {
               maxLines: null,
               decoration: const InputDecoration(
                 hintText: 'Write your note here...',
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-                border: InputBorder.none, 
+                hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
+                border: InputBorder.none,
                 contentPadding: EdgeInsets.zero,
               ),
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-              ),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
             const SizedBox(height: 16),
             Row(
@@ -106,15 +103,10 @@ class _NotePageState extends State<NotePage> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 36,
-                        color: Colors.green,
-                      ),
+                      child: Icon(Icons.add, size: 36, color: Colors.green),
                     ),
                   ),
                 ),
-
               ],
             ),
             const SizedBox(height: 120),
@@ -130,7 +122,7 @@ class _NotePageState extends State<NotePage> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(); 
+                            Navigator.of(context).pop();
                           },
                           child: const Text('OK'),
                         ),
@@ -145,10 +137,7 @@ class _NotePageState extends State<NotePage> {
                   ),
                   elevation: 2,
                 ),
-                child: const Text(
-                  'Add Note',
-                  style: TextStyle(fontSize: 16),
-                ),
+                child: const Text('Add Note', style: TextStyle(fontSize: 16)),
               ),
             ),
           ],

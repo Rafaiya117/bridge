@@ -34,7 +34,11 @@ class WalkingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // App Bar
-            Padding(
+            GestureDetector(
+              onTap: () {
+                context.go('/profile');
+              },
+              child:Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
@@ -45,7 +49,7 @@ class WalkingPage extends StatelessWidget {
                       color: Color(0xFF007E33),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Icon(Icons.arrow_back, color: Colors.white),
+                    child: Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
                   SizedBox(width: 12),
                   Text(
@@ -57,6 +61,7 @@ class WalkingPage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
             ),
 
             // Person Label

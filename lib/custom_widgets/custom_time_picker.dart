@@ -35,7 +35,7 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
   void _selectHour(int hour) {
     setState(() {
       selectedHour = hour;
-      selectingHour = false; // switch to minute selection after picking hour
+      selectingHour = false;
     });
   }
 
@@ -64,8 +64,7 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
     if (selectingHour) {
       numbers = [12,1,2,3,4,5,6,7,8,9,10,11];
     } else {
-      // minutes in steps of 5 for simplicity, you can do 60 steps too
-      numbers = List.generate(12, (i) => i * 5); // 0,5,10,...55
+      numbers = List.generate(12, (i) => i * 5);
     }
 
     return Container(
@@ -79,14 +78,14 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
             height: radius * 2,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.green.withOpacity(0.1),
+              color: Color(0xFFE6F2EA), // light greenish gray background
             ),
           ),
 
           // Numbers around the dial
           ...List.generate(numbers.length, (index) {
             final number = numbers[index];
-            final angle = (index * 30 - 60) * pi / 180; // position on circle
+            final angle = (index * 30 - 60) * pi / 180;
 
             final x = radius + radius * 0.7 * cos(angle);
             final y = radius + radius * 0.7 * sin(angle);
@@ -115,16 +114,19 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: isSelected ? Colors.green : Colors.transparent,
+                    color: isSelected ? Color(0xFF008000) : Colors.transparent,
                     shape: BoxShape.circle,
+                    boxShadow: isSelected
+                        ? [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))]
+                        : [],
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     displayText,
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.black,
+                      fontSize: 14,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      color: isSelected ? Colors.white : Colors.grey[700],
                     ),
                   ),
                 ),
@@ -140,8 +142,9 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
               width: 6,
               height: 6,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Color(0xFF008000),
                 shape: BoxShape.circle,
+                boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2))],
               ),
             ),
           ),
@@ -154,8 +157,9 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Color(0xFF008000),
                 shape: BoxShape.circle,
+                boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))],
               ),
             ),
           ),
@@ -186,7 +190,7 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  child: Icon(Icons.close, color: Colors.green),
+                  child: Icon(Icons.close, color: Color(0xFF008000)),
                   onTap: () => Navigator.pop(context),
                 )
               ],
@@ -199,7 +203,11 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
               alignment: Alignment.centerLeft,
               child: Text(
                 '$year\n$day, $monthName',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  color: Colors.grey[800],
+                ),
               ),
             ),
 
@@ -209,7 +217,14 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Would You Like Set An Alarm ?", style: TextStyle(fontSize: 16)),
+                Text(
+                  "Would You Like Set An Alarm ?",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                ),
                 Icon(Icons.access_time, size: 24, color: Colors.black),
               ],
             ),
@@ -218,7 +233,13 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
 
             Align(
               alignment: Alignment.centerLeft,
-              child: Text("put your time", style: TextStyle(color: Colors.grey)),
+              child: Text(
+                "put your time",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[600],
+                ),
+              ),
             ),
 
             SizedBox(height: 10),
@@ -233,7 +254,7 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
                     selectedHour.toString().padLeft(2, '0'),
                     style: TextStyle(
                       fontSize: 36,
-                      color: selectingHour ? Colors.green : Colors.black,
+                      color: selectingHour ? Color(0xFF008000) : Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -245,7 +266,7 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
                     selectedMinute.toString().padLeft(2, '0'),
                     style: TextStyle(
                       fontSize: 36,
-                      color: !selectingHour ? Colors.green : Colors.black,
+                      color: !selectingHour ? Color(0xFF008000) : Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -255,7 +276,10 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
                   onTap: _togglePeriod,
                   child: Text(
                     period == DayPeriod.am ? "AM" : "PM",
-                    style: TextStyle(fontSize: 18, color: Colors.green),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF008000),
+                    ),
                   ),
                 )
               ],
@@ -273,20 +297,22 @@ class _CustomTimePickerDialogState extends State<CustomTimePickerDialog> {
                 OutlinedButton(
                   onPressed: () => Navigator.of(context).pop(),
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.green),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    side: BorderSide(color: Color(0xFF008000)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                   ),
-                  child: Text("Cancel", style: TextStyle(color: Colors.green)),
+                  child: Text("Cancel", style: TextStyle(color: Color(0xFF008000))),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(getSelectedTime());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    backgroundColor: Color(0xFF008000),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                   ),
-                  child: Text("Done"),
+                  child: Text("Done", style: TextStyle(color: Colors.white)),
                 )
               ],
             ),

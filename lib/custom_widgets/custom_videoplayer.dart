@@ -22,6 +22,28 @@ class VideoPage extends StatelessWidget {
           onTogglePlay();
         }
       },
+
+      // Added drag to seek functionality here:
+      onHorizontalDragUpdate: (details) async {
+        if (!controller.value.isInitialized) return;
+
+        final duration = controller.value.duration;
+        if (duration == null) return;
+
+        final position = controller.value.position;
+        // Adjust this sensitivity as needed; 10 pixels = 1 second seek
+        final seekDeltaSeconds = details.delta.dx / 10;
+
+        Duration newPosition =
+            position + Duration(seconds: seekDeltaSeconds.round());
+
+        // Clamp the new position between 0 and video duration
+        if (newPosition < Duration.zero) newPosition = Duration.zero;
+        if (newPosition > duration) newPosition = duration;
+
+        await controller.seekTo(newPosition);
+      },
+
       child: Stack(
         children: [
           // 🔴 Background Video
@@ -47,20 +69,22 @@ class VideoPage extends StatelessWidget {
                 secondIcon: Icons.notifications,
                 firstIconColor: Colors.red,
                 secondIconColor: Colors.black,
-                profileImageUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+                profileImageUrl:
+                    'https://randomuser.me/api/portraits/women/44.jpg',
               ),
             ),
           ),
 
           // ✅ Floating Button
           Positioned(
-            top: 100,
+            top: 110,
             right: 16,
             child: FloatingActionButton(
               onPressed: () {},
-              backgroundColor: Colors.green,
-              child: Icon(Icons.add),
+              backgroundColor: Color(0xFF009038),
+              child: const Icon(Icons.add, color: Colors.white),
               mini: true,
+              shape: const CircleBorder(),
             ),
           ),
 
@@ -96,6 +120,7 @@ class VideoPage extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
+                  // ignore: deprecated_member_use
                   colors: [Colors.black.withOpacity(0.8), Colors.transparent],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -108,19 +133,29 @@ class VideoPage extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+                        backgroundImage: NetworkImage(
+                          'https://via.placeholder.com/150',
+                        ),
                       ),
                       SizedBox(width: 8),
                       Text(
                         "Makama",
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      Spacer(),
+                      // Spacer(),
+                      SizedBox(width: 8),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.green, width: 2),
                         ),
                         child: Row(
                           children: [

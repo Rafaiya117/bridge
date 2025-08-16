@@ -6,6 +6,7 @@ import 'package:tha_bridge/app_route/app_route.dart';
 import 'package:tha_bridge/app_route/no_connectivity/no_internet_connectivity.dart';
 import 'package:tha_bridge/provider/note_provider.dart';
 import 'package:tha_bridge/provider/post_provider.dart';
+import 'package:tha_bridge/provider/video_provider.dart';
 
 void main() {
   runApp(
@@ -13,6 +14,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => PostProvider()..loadPosts()),
         ChangeNotifierProvider(create: (_) => NoteProvider()),
+          ChangeNotifierProvider(create: (_) => VideoProvider()..initVideos()),
       ],
       child: const MyApp(),
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tha_bridge/components/topnav.dart';
 
 class GoalPage extends StatefulWidget {
@@ -15,14 +16,35 @@ class _GoalPageState extends State<GoalPage> {
   static const lightGreen = Color(0xFFB8DC8A);
 
   final List<String> options = ['Today', 'This week', 'This month'];
-  String selectedValue = 'Today'; // moved here for state
-  
+  String selectedValue = 'Today';
+
+  final GlobalKey _dropdownKey = GlobalKey();
 
   final goals = [
-    GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
-    GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
-    GoalItem(title: 'Morning Meditation', date: '27 Feb 2025', time: '09:00 PM', completed: true),
-    GoalItem(title: 'Read Book', date: '27 Feb 2025', time: '09:00 PM', completed: false),
+    GoalItem(
+      title: 'Morning Meditation',
+      date: '27 Feb 2025',
+      time: '09:00 PM',
+      completed: true,
+    ),
+    GoalItem(
+      title: 'Read Book',
+      date: '27 Feb 2025',
+      time: '09:00 PM',
+      completed: false,
+    ),
+    GoalItem(
+      title: 'Morning Meditation',
+      date: '27 Feb 2025',
+      time: '09:00 PM',
+      completed: true,
+    ),
+    GoalItem(
+      title: 'Read Book',
+      date: '27 Feb 2025',
+      time: '09:00 PM',
+      completed: false,
+    ),
   ];
 
   @override
@@ -49,7 +71,8 @@ class _GoalPageState extends State<GoalPage> {
               secondIcon: Icons.notifications,
               firstIconColor: Colors.red,
               secondIconColor: Colors.black,
-              profileImageUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+              profileImageUrl:
+                  'https://randomuser.me/api/portraits/women/44.jpg',
             ),
           ],
         ),
@@ -72,12 +95,17 @@ class _GoalPageState extends State<GoalPage> {
                             barrierDismissible: true,
                             builder: (BuildContext context) {
                               return Dialog(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
                                 child: Stack(
                                   clipBehavior: Clip.none,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 24,
+                                        vertical: 24,
+                                      ),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -105,7 +133,10 @@ class _GoalPageState extends State<GoalPage> {
                                       top: -5,
                                       right: -5,
                                       child: IconButton(
-                                        icon: const Icon(Icons.close, color: Colors.green),
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.green,
+                                        ),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
@@ -124,7 +155,7 @@ class _GoalPageState extends State<GoalPage> {
                         onTap: () {
                           context.go('/walkinggroupchat');
                         },
-                        child: const Icon(Icons.message_outlined, size: 28),
+                        child: const Icon(Icons.message_rounded, size: 28),
                       ),
                     ],
                   ),
@@ -144,13 +175,20 @@ class _GoalPageState extends State<GoalPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
                     ),
                     child: const Text(
                       'Create a Goal',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -174,7 +212,9 @@ class _GoalPageState extends State<GoalPage> {
                       value: 0.5,
                       strokeWidth: 14,
                       backgroundColor: Colors.grey[300],
-                      valueColor: const AlwaysStoppedAnimation<Color>(greenColor),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        greenColor,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -189,7 +229,10 @@ class _GoalPageState extends State<GoalPage> {
                               height: 14,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.black, width: 2),
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 2,
+                                ),
                                 color: greenColor,
                               ),
                             ),
@@ -208,7 +251,10 @@ class _GoalPageState extends State<GoalPage> {
                               height: 14,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.black, width: 2),
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 2,
+                                ),
                                 color: Colors.white,
                               ),
                             ),
@@ -229,14 +275,22 @@ class _GoalPageState extends State<GoalPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Be Prepared',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: GoogleFonts.philosopher(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   GestureDetector(
+                    key: _dropdownKey,
                     onTap: () async {
-                      final RenderBox renderBox = context.findRenderObject() as RenderBox;
-                      final Offset offset = renderBox.localToGlobal(Offset.zero);
+                      final RenderBox renderBox =
+                          _dropdownKey.currentContext!.findRenderObject()
+                              as RenderBox;
+                      final Offset offset = renderBox.localToGlobal(
+                        Offset.zero,
+                      );
 
                       final selected = await showMenu<String>(
                         context: context,
@@ -247,10 +301,12 @@ class _GoalPageState extends State<GoalPage> {
                           offset.dy,
                         ),
                         items: options
-                            .map((e) => PopupMenuItem<String>(
-                                  value: e,
-                                  child: Text(e),
-                                ))
+                            .map(
+                              (e) => PopupMenuItem<String>(
+                                value: e,
+                                child: Text(e),
+                              ),
+                            )
                             .toList(),
                       );
 
@@ -261,7 +317,10 @@ class _GoalPageState extends State<GoalPage> {
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 12,
+                      ),
                       decoration: BoxDecoration(
                         color: greenColor,
                         borderRadius: BorderRadius.circular(20),
@@ -271,7 +330,10 @@ class _GoalPageState extends State<GoalPage> {
                         children: [
                           Text(
                             selectedValue,
-                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
                           ),
                           const SizedBox(width: 4),
                           const Icon(
@@ -297,7 +359,10 @@ class _GoalPageState extends State<GoalPage> {
                         color: lightGreen,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -329,7 +394,7 @@ class _GoalPageState extends State<GoalPage> {
                               children: [
                                 Text(
                                   goal.title,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.philosopher(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),

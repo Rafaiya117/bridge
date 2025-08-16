@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TermsConditionsPage extends StatelessWidget {
   const TermsConditionsPage({Key? key}) : super(key: key);
@@ -37,10 +38,11 @@ class TermsConditionsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              const Text(
+              Text(
                 'By using [Your App Name], you agree to these Terms & Conditions. If you do not agree, please do not use our services.',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 14,
+                  height: 1.5,
                   color: Colors.black,
                 ),
               ),
@@ -50,9 +52,9 @@ class TermsConditionsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         '1. Use of Service',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -60,29 +62,24 @@ class TermsConditionsPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       bulletText('10 years old to adult'),
                       bulletText('Parent or guardian permission'),
-                      bulletText(
-                          'Do not use the service for illegal, fraudulent, or deceptive activities.'),
-                      bulletText(
-                          'We may suspend or terminate accounts that violate our policies.'),
+                      bulletText('Do not use the service for illegal, fraudulent, or deceptive activities.'),
+                      bulletText('We may suspend or terminate accounts that violate our policies.'),
                       const SizedBox(height: 12),
-                      const Text(
+                      Text(
                         '2. Subscription & Payments',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 8),
-                      bulletText(
-                          'You are responsible for managing your subscription in the Manage Subscription section.'),
-                      bulletText(
-                          'Payments are non-refundable unless stated otherwise.'),
-                      bulletText(
-                          'Cancellation takes effect at the end of the billing cycle.'),
+                      bulletText('You are responsible for managing your subscription in the Manage Subscription section.'),
+                      bulletText('Payments are non-refundable unless stated otherwise.'),
+                      bulletText('Cancellation takes effect at the end of the billing cycle.'),
                       const SizedBox(height: 12),
-                      const Text(
+                      Text(
                         '3. Voice Cloning & Content',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -94,17 +91,16 @@ class TermsConditionsPage extends StatelessWidget {
                       bulletText(
                           'We are not responsible for any misuse of cloned voices by users.'),
                       const SizedBox(height: 12),
-                      const Text(
+                      Text(
                         '4. Privacy & Security',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 8),
                       bulletText('We follow strict privacy policies to protect user data.'),
-                      bulletText(
-                          'Voice data processing may involve...'), // The image cuts off here so I abbreviated.
+                      bulletText('Voice data processing may involve...'), 
                     ],
                   ),
                 ),
@@ -122,15 +118,16 @@ class TermsConditionsPage extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('• ',
-              style: TextStyle(
+          Text('• ',
+              style: GoogleFonts.poppins(
                 fontSize: 14,
                 height: 1.3,
-              )),
+              ),
+            ),
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 14,
                 height: 1.3,
               ),

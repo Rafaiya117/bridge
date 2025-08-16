@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HelpSupportPage extends StatelessWidget {
   @override
@@ -24,7 +25,11 @@ class HelpSupportPage extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 18),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -40,7 +45,7 @@ class HelpSupportPage extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: Colors.black87,
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 40),
@@ -72,17 +77,17 @@ class HelpSupportPage extends StatelessWidget {
                   // Cancel button
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      context.go('/profile');
                     },
                     child: Text(
                       'Cancel',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyle(fontSize: 16, color: Colors.black87),
                     ),
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                       minimumSize: Size(100, 40),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
@@ -93,15 +98,15 @@ class HelpSupportPage extends StatelessWidget {
                   // Send button
                   ElevatedButton(
                     onPressed: () {
-                      // Send action
+                      showCustomDialog(context);
                     },
-                    child: Text(
-                      'Send',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Text('Send', style: TextStyle(fontSize: 16)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF43A047), // green
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
@@ -114,6 +119,80 @@ class HelpSupportPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // prevents dismiss by tapping outside
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 16), // space below the X button
+                    const Text(
+                      "We are deeply sorry for the problem you are facing. "
+                      "We have received your message. We will contact you via email very soon.",
+                      style: TextStyle(fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: 120,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text(
+                          "Cool",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Positioned green circular X button at top-right
+              Positioned(
+                top: 10,
+                right: 10,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop(); // close dialog
+                  },
+                  child: Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Center(
+                      child: Icon(Icons.close, color: Colors.white, size: 18),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

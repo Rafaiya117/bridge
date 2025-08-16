@@ -50,7 +50,7 @@ class WalkingChatPage extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.only(left: 12),
           child: GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => context.go('/set_goal_page'),
             child: Container(
               width: 40,
               height: 32, // Now this will take effect
